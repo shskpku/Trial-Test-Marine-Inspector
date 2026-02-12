@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jendela Belajar - KSOP Pekanbaru</title>
+    <link href="logo-shsk.png" rel="icon" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar" id="main-nav">
+      <div class="nav-container">
+        <div class="nav-left">
+          <img src="logo.png" alt="Logo" class="main-logo" />
+          <div class="brand">
+            JENDELA <span class="neon-cyan">BELAJAR</span>
+          </div>
+        </div>
+
+        <div class="hamburger" id="hamburger">
+          <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li>
+            <a
+              href="javascript:void(0)"
+              class="nav-link active"
+              onclick="showDashboard()"
+              >Dashboard</a
+            >
+          </li>
+          <li>
+            <a
+              href="javascript:void(0)"
+              class="nav-link"
+              onclick="showTrialTestPage()"
+              >Trial Test</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <section id="dashboard-section">
+      <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h1 class="hero-title">
+            JENDELA <span class="neon-title">BELAJAR</span>
+          </h1>
+          <p class="section-name">SEKSI STATUS HUKUM DAN SERTIFIKASI KAPAL</p>
+          <p class="agency-name">KSOP KELAS II PEKANBARU</p>
+
+          <div class="welcome-card">
+            <h2>Selamat Datang</h2>
+            <p>
+              Platform pusat pembelajaran dan referensi digital untuk
+              efektivitas pengawasan status hukum serta sertifikasi kapal.
+            </p>
+            <button class="btn-main-neon" onclick="showTrialTestPage()">
+              Mulai Test <i class="fas fa-anchor"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+    </section>
+
+    <section id="trial-test-section" class="trial-section hidden">
+      <div class="container" id="quiz-app">
+        <div id="view-selection" class="quiz-view">
+          <h1 class="neon-title-main">TRIAL TEST</h1>
+          <p class="subtitle-test">Marine Inspector Competency</p>
+          <div class="button-group">
+            <button
+              class="btn-type neon-border-blue"
+              onclick="goToRegistration('A')"
+            >
+              <i class="fas fa-ship"></i>
+              <span>Marine Inspector Type A</span>
+            </button>
+            <button
+              class="btn-type neon-border-purple"
+              onclick="goToRegistration('B')"
+            >
+              <i class="fas fa-anchor"></i>
+              <span>Marine Inspector Type B</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="view-registration" class="quiz-view hidden">
+          <div class="reg-card">
+            <h2 id="reg-title" class="neon-cyan">Registrasi Peserta</h2>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input
+                  type="text"
+                  id="user-nama"
+                  placeholder="Masukkan Nama Lengkap"
+                />
+              </div>
+              <div class="form-group">
+                <label>NIP</label>
+                <input type="text" id="user-nip" placeholder="Masukkan NIP" />
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  id="user-email"
+                  placeholder="Email untuk Pengiriman Hasil"
+                />
+              </div>
+              <div class="form-group">
+                <label>UPT / Instansi</label>
+                <input
+                  type="text"
+                  id="user-upt"
+                  placeholder="Contoh: KSOP Kelas II Pekanbaru"
+                />
+              </div>
+            </div>
+            <div class="attention-box">
+              <h4><i class="fas fa-exclamation-triangle"></i> Instruksi:</h4>
+              <ul>
+                <li>Waktu ujian adalah <strong>120 Menit (2 Jam)</strong>.</li>
+                <li>Sistem akan otomatis mengunci saat waktu habis.</li>
+                <li>Tinjau kembali jawaban Anda sebelum klik Finish.</li>
+              </ul>
+            </div>
+            <button class="btn-full-neon" onclick="startQuiz()">
+              MULAI TEST SEKARANG <i class="fas fa-play"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="view-quiz" class="quiz-view hidden">
+          <div class="quiz-header">
+            <div class="timer-box">
+              SISA WAKTU: <span id="timer">02:00:00</span>
+            </div>
+            <div class="quiz-info">
+              Soal No: <span id="current-num">1</span> dari 100
+            </div>
+          </div>
+
+          <div class="quiz-container">
+            <div class="quiz-left">
+              <div id="question-container" class="question-box"></div>
+              <div class="quiz-nav-btns">
+                <button class="btn-nav" id="btn-prev" onclick="prevQuestion()">
+                  <i class="fas fa-chevron-left"></i> PREV
+                </button>
+                <button class="btn-nav" id="btn-next" onclick="nextQuestion()">
+                  NEXT <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="quiz-right">
+              <h4 class="nav-header-title">QUESTION NAVIGATION</h4>
+              <div class="nav-scroll-wrapper">
+                <div class="num-grid" id="nav-grid"></div>
+              </div>
+              <button class="btn-finish-exam" onclick="triggerFinish()">
+                FINISH
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="view-result" class="quiz-view hidden">
+          <div class="score-card">
+            <h1 id="result-greeting">TEST RESULT</h1>
+            <div class="score-circle">
+              <span id="final-score">0</span>
+              <p>SCORE</p>
+            </div>
+            <div class="score-details-row">
+              <div class="stat-item">
+                CORRECT: <span id="count-correct" style="color: #00ff00">0</span>
+              </div>
+              <div class="stat-item">
+                WRONG: <span id="count-wrong" style="color: #ff4444">0</span>
+              </div>
+            </div>
+            <button
+              class="btn-main-neon"
+              onclick="showDashboard()"
+              style="margin-top: 20px"
+            >
+              BACK TO HOME
+            </button>
+          </div>
+
+          <div class="review-header">
+            <h3 class="neon-cyan">
+              <i class="fas fa-list-check"></i> Review Jawaban
+            </h3>
+            <p>
+              Berikut adalah ulasan jawaban lengkap beserta kunci jawaban yang
+              benar.
+            </p>
+          </div>
+          <div id="review-container" class="review-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <div id="custom-modal" class="modal-overlay hidden">
+      <div class="modal-card">
+        <div class="modal-icon" id="modal-icon">
+          <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <h3 id="modal-title">Konfirmasi</h3>
+        <p id="modal-message">Apakah Anda yakin ingin melakukan aksi ini?</p>
+        <div class="modal-buttons">
+          <button id="modal-btn-confirm" class="btn-modal btn-confirm">
+            YA, LANJUTKAN
+          </button>
+          <button id="modal-btn-cancel" class="btn-modal btn-cancel">
+            BATAL
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
